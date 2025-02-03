@@ -10,3 +10,8 @@ poetry add nazwapakietu
 Synchro:
 poetry export -f requirements.txt --output requirements.txt
 pipenv sync
+
+Jeśli chcesz wymusić użycie konkretnej wersji Pythona, możesz dodać:
+
+poetry env use python3.10
+pipenv --python 3.10
