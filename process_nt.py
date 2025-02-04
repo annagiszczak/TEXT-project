@@ -4,12 +4,11 @@ df = pd.read_csv("data/OGNT_full.csv",
                  sep="\t",
                  dtype=str,
                  usecols=("〔Book｜Chapter｜Verse〕",
-                          "〔BDAGentry｜EDNTentry｜MounceEntry｜GoodrickKohlenbergerNumbers｜LN-LouwNidaNumbers〕", 
+                          "〔OGNTk｜OGNTu｜OGNTa｜lexeme｜rmac｜sn〕",
+                        #   "〔BDAGentry｜EDNTentry｜MounceEntry｜GoodrickKohlenbergerNumbers｜LN-LouwNidaNumbers〕", 
                           "〔TBESG｜IT｜LT｜ST｜Español〕",
                           )
                 )
-
-book_names = ["mt", "mk", "lk", "j", "acts", "rom", "1kor", "2kor", "gal", "eph", "phi", "col", "1tes", "2tes", "1tym", "2tym", "tit", "fil", "heb", "jam", "1pet", "2pet", "1j", "2j", "3j", "jd", "rev"]
 
 author_dict = {
     "mt": "matthew", 
@@ -42,22 +41,27 @@ author_dict = {
 }
 
 # decode address
-addresses = df.iloc[:,0].apply(lambda x: x.strip('〔〕').split('｜'))
+addresses = df["〔Book｜Chapter｜Verse〕"].apply(lambda x: x.strip('〔〕').split('｜'))
 df["book"] = [list(author_dict.keys())[int(a[0]) - 40] for a in addresses] # book is coded with book number starting with 40
 df["chapter"] = [int(a[1]) for a in addresses]
 df["verse"] = [int(a[2]) for a in addresses]
 
 # decode word
-df["token"] = df.iloc[:,1].apply(lambda x: x.strip('〔〕').split('｜')[0])
+# df["token"] = df["〔BDAGentry｜EDNTentry｜MounceEntry｜GoodrickKohlenbergerNumbers｜LN-LouwNidaNumbers〕"].apply(lambda x: x.strip('〔〕').split('｜')[0])
+df["word"] = df["〔OGNTk｜OGNTu｜OGNTa｜lexeme｜rmac｜sn〕"].apply(lambda x: x.strip('〔〕').split('｜')[1])
+
+# decode lemma
+df["lemma"] = df["〔OGNTk｜OGNTu｜OGNTa｜lexeme｜rmac｜sn〕"].apply(lambda x: x.strip('〔〕').split('｜')[3])
 
 # decode translation
-df["trans"] = df.iloc[:,2].apply(lambda x: x.strip('〔〕').split('｜')[0])
+df["trans"] = df["〔TBESG｜IT｜LT｜ST｜Español〕"].apply(lambda x: x.strip('〔〕').split('｜')[0])
 
 # authorship
 df["author"] = df["book"].apply(lambda x: author_dict[x])
 
 df.drop("〔Book｜Chapter｜Verse〕", axis=1, inplace=True)
-df.drop("〔BDAGentry｜EDNTentry｜MounceEntry｜GoodrickKohlenbergerNumbers｜LN-LouwNidaNumbers〕", axis=1, inplace=True)
+df.drop("〔OGNTk｜OGNTu｜OGNTa｜lexeme｜rmac｜sn〕", axis=1, inplace=True)
+# df.drop("〔BDAGentry｜EDNTentry｜MounceEntry｜GoodrickKohlenbergerNumbers｜LN-LouwNidaNumbers〕", axis=1, inplace=True)
 df.drop("〔TBESG｜IT｜LT｜ST｜Español〕", axis=1, inplace=True)
 
 df.to_csv("data/OGNT_processed.csv")
