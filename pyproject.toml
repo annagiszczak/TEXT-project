@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "text-project"
+version = "1"
+description = "Fajny projekcik"
+authors = ["Wiktor Ciołek and Anna Giszczak"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

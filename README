@@ -1,0 +1,12 @@
+pip install poetry pipenv
+poetry export -f requirements.txt --output requirements.txt
+pipenv install -r requirements.txt
+poetry shell
+pipenv shell
+
+Dodawanie pakietów:
+poetry add nazwapakietu
+
+Synchro:
+poetry export -f requirements.txt --output requirements.txt
+pipenv sync
