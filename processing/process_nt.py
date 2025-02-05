@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("data/OGNT_full.csv",
+df = pd.read_csv("../data/OGNT_full.csv",
                  sep="\t",
                  dtype=str,
                  usecols=("〔Book｜Chapter｜Verse〕",
@@ -64,4 +64,4 @@ df.drop("〔OGNTk｜OGNTu｜OGNTa｜lexeme｜rmac｜sn〕", axis=1, inplace=True
 # df.drop("〔BDAGentry｜EDNTentry｜MounceEntry｜GoodrickKohlenbergerNumbers｜LN-LouwNidaNumbers〕", axis=1, inplace=True)
 df.drop("〔TBESG｜IT｜LT｜ST｜Español〕", axis=1, inplace=True)
 
-df.to_csv("data/OGNT_processed.csv")
+df.to_csv("../data/OGNT_processed.csv")
