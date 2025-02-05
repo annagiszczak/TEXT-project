@@ -1,14 +1,21 @@
 [tool.poetry]
 name = "text-project"
-version = "1"
-description = "Fajny projekcik"
-authors = ["Wiktor Ciołek and Anna Giszczak"]
-readme = "README.md"
+version = "0.1.0"
+description = ""
+authors = ["Wikcio1618 <ciolekwiktor@gmail.com>"]
+readme = "README"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
+seaborn = "^0.13.2"
+numpy = "^2.2.2"
+pandas = "^2.2.3"
+ipykernel = "^6.29.5"
+notebook = "^7.3.2"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
